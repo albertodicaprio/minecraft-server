@@ -1,0 +1,37 @@
+services:
+  minecraft:
+    build: .
+    image: local/paper-minecraft:latest
+    container_name: minecraft
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATA_DIR: /data
+      JAVA_MEMORY: ${JAVA_MEMORY:-12G}
+      UPDATE_PLUGINS_ON_START: ${UPDATE_PLUGINS_ON_START:-true}
+      ENABLE_TELEGRAM_NOTIFY: ${ENABLE_TELEGRAM_NOTIFY:-true}
+      ENABLE_TELEGRAM_TO_MC: ${ENABLE_TELEGRAM_TO_MC:-true}
+    ports:
+      - "${MINECRAFT_PORT:-25565}:25565/tcp"
+      - "${GEYSER_PORT:-19132}:19132/udp"
+    volumes:
+      - ./data:/data
+      - ./config/root/server.properties:/defaults/server.properties:ro
+      - ./config/root/bukkit.yml:/data/bukkit.yml
+      - ./config/root/spigot.yml:/data/spigot.yml
+      - ./config/root/commands.yml:/data/commands.yml
+      - ./config/root/help.yml:/data/help.yml
+      - ./config/root/permissions.yml:/data/permissions.yml
+      - ./config/root/eula.txt:/data/eula.txt
+      - ./config/root/ops.json:/data/ops.json
+      - ./config/root/whitelist.json:/data/whitelist.json
+      - ./config/root/banned-ips.json:/data/banned-ips.json
+      - ./config/root/banned-players.json:/data/banned-players.json
+      - ./config/paper:/data/config
+      - ./config/plugins/Geyser-Spigot:/data/plugins/Geyser-Spigot
+      - ./config/plugins/floodgate:/data/plugins/floodgate
+      - ./config/plugins/spark:/data/plugins/spark
+    stdin_open: true
+    tty: true
+    stop_grace_period: 2m

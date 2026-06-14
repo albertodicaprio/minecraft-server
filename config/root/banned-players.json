@@ -1,0 +1,16 @@
+[
+  {
+    "uuid": "80f8e86a-f1ef-4f29-9dde-6663b6211049",
+    "name": "KittyScan01",
+    "created": "2026-04-28 15:58:19 +0000",
+    "source": "AlBeRt6666",
+    "expires": "forever"
+  },
+  {
+    "uuid": "062756ef-bf83-4f39-9b52-c73f767c6b5b",
+    "name": "KittyScanArchive",
+    "created": "2026-04-28 15:49:10 +0000",
+    "source": "AlBeRt6666",
+    "expires": "forever"
+  }
+]
