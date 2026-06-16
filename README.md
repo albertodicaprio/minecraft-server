@@ -34,6 +34,8 @@ data/world_the_end
 
 Geyser and Floodgate jars are downloaded into `data/plugins` on startup when `UPDATE_PLUGINS_ON_START=true`.
 
+By default, the server downloads the latest stable Paper version. Set `PAPER_VERSION` in `.env` to pin a specific Minecraft/Paper version line, for example `PAPER_VERSION=1.21.1`; `PAPER_VERSION=21.1` is also accepted as shorthand for `1.21.1`. The downloader will still use the latest build available for that version.
+
 `start-paper.sh` also starts the Telegram notification and Telegram-to-Minecraft bridge scripts before launching Paper. They can be disabled with `ENABLE_TELEGRAM_NOTIFY=false` or `ENABLE_TELEGRAM_TO_MC=false`. On container stop, the launcher sends `SIGTERM` to Paper and both helper scripts, then waits for them to exit.
 
 The container runs as user `mc` with UID/GID `1000`, so host-mounted files should be writable by UID `1000`.

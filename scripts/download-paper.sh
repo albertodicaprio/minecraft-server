@@ -2,19 +2,41 @@
 set -euo pipefail
 
 DATA_DIR="${DATA_DIR:-/data}"
+PAPER_VERSION="${PAPER_VERSION:-}"
 
 cd "$DATA_DIR"
 
 echo "Checking for Paper updates..."
 PAPER_VERSIONS="$(curl -fsS -H "accept: application/json" "https://fill.papermc.io/v3/projects/paper")"
-LATEST_PAPER="$(echo "$PAPER_VERSIONS" | jq -r '
-  .versions
-  | to_entries
-  | map(.value[])
-  | flatten
-  | map(select(test("-(rc|pre|beta|alpha)"; "i") | not))
-  | .[0]
-')"
+
+if [[ -n "$PAPER_VERSION" ]]; then
+  LATEST_PAPER="$(echo "$PAPER_VERSIONS" | jq -r --arg version "$PAPER_VERSION" '
+    .versions
+    | to_entries
+    | map(.value[])
+    | flatten
+    | map(select(. == $version or . == ("1." + $version)))
+    | .[0] // empty
+  ')"
+
+  if [[ -z "$LATEST_PAPER" ]]; then
+    echo "Requested Paper version is not available: $PAPER_VERSION" >&2
+    exit 1
+  fi
+
+  echo "Using requested Paper version: $LATEST_PAPER"
+else
+  LATEST_PAPER="$(echo "$PAPER_VERSIONS" | jq -r '
+    .versions
+    | to_entries
+    | map(.value[])
+    | flatten
+    | map(select(test("-(rc|pre|beta|alpha)"; "i") | not))
+    | .[0]
+  ')"
+
+  echo "Using latest stable Paper version: $LATEST_PAPER"
+fi
 
 LATEST_BUILD_INFO="$(curl -fsS -H "accept: application/json" "https://fill.papermc.io/v3/projects/paper/versions/${LATEST_PAPER}/builds/latest")"
 LATEST_NAME="$(echo "$LATEST_BUILD_INFO" | jq -r '.downloads."server:default".name')"
