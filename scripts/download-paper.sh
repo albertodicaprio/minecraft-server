@@ -7,6 +7,7 @@ PAPER_VERSION="${PAPER_VERSION:-}"
 cd "$DATA_DIR"
 
 echo "Checking for Paper updates..."
+echo "PAPER_VERSION: '$PAPER_VERSION'"
 PAPER_VERSIONS="$(curl -fsS -H "accept: application/json" "https://fill.papermc.io/v3/projects/paper")"
 
 if [[ -n "$PAPER_VERSION" ]]; then
