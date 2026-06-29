@@ -55,7 +55,9 @@ download_plugin() {
 
 download_plugin \
   "Geyser-Spigot.jar" \
-  "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot"
+  "https://download.geysermc.org/v2/projects/geyserpreview/versions/pr.6452/builds/latest/downloads/spigot"
+
+# "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot"
 
 download_plugin \
   "floodgate-spigot.jar" \
