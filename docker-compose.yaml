@@ -2,7 +2,6 @@ services:
   minecraft:
     build: .
     image: local/paper-minecraft:latest
-    container_name: minecraft
     restart: unless-stopped
     env_file:
       - .env
@@ -36,3 +35,4 @@ services:
     stdin_open: true
     tty: true
     stop_grace_period: 2m
+
