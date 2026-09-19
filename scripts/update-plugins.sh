@@ -23,7 +23,7 @@ download_plugin() {
   local target="$PLUGINS_DIR/$name"
   local tmpfile="$TMP_DIR/$name"
 
-  echo "Downloading $name..."
+  echo "Downloading $name from $url ..."
   curl -fsSL -o "$tmpfile" "$url"
 
   if [[ ! -f "$target" ]]; then
@@ -55,7 +55,8 @@ download_plugin() {
 
 download_plugin \
   "Geyser-Spigot.jar" \
-  "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot"
+  "https://download.geysermc.org/v2/projects/geyserpreview/versions/pr.6712/builds/latest/downloads/spigot"
+#  "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot"
 
 download_plugin \
   "floodgate-spigot.jar" \
