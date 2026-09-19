@@ -35,4 +35,8 @@ if [[ -n "${MANAGEMENT_SERVER_SECRET:-}" ]]; then
   set_property "management-server-secret" "$MANAGEMENT_SERVER_SECRET"
 fi
 
+if [[ -n "${MOTD:-}" ]]; then
+  set_property "motd" "$MOTD"
+fi
+
 exec "$@"

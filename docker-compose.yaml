@@ -9,12 +9,13 @@ services:
       DATA_DIR: /data
       JAVA_MEMORY: ${JAVA_MEMORY:-12G}
       PAPER_VERSION: ${PAPER_VERSION:-}
+      MOTD: ${MOTD:-}
       UPDATE_PLUGINS_ON_START: ${UPDATE_PLUGINS_ON_START:-true}
       ENABLE_TELEGRAM_NOTIFY: ${ENABLE_TELEGRAM_NOTIFY:-true}
       ENABLE_TELEGRAM_TO_MC: ${ENABLE_TELEGRAM_TO_MC:-true}
     ports:
-      - "${MINECRAFT_PORT:-25565}:25565/tcp"
-      - "${GEYSER_PORT:-19132}:19132/udp"
+      - "${EXT_MINECRAFT_PORT:-25565}:25565/tcp"
+      - "${EXT_GEYSER_PORT:-19132}:19132/udp"
     volumes:
       - ./data:/data
       - ./config/root/server.properties:/defaults/server.properties:ro
